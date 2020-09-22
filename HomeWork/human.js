@@ -6,34 +6,7 @@ function Human(obj) {
 
 function Teacher(obj) {
     Human.call(this, obj);
-    this.group = obj.group || [
-        new Student({
-            name: 'Andrew',
-            surname: 'Wilson',
-            age: 18,
-            mark: [5, 2, 3, 10, 7, 1]
-        }), new Student({
-            name: 'Ella',
-            surname: 'Thomas',
-            age: 17,
-            mark: [5, 1, 3, 10, 2, 10]
-        }), new Student({
-            name: 'Eleanor',
-            surname: 'Walker',
-            age: 19,
-            mark: [5, 7, 5, 9, 8, 10]
-        }), new Student({
-            name: 'Maxim',
-            surname: 'Johnson',
-            age: 18,
-            mark: [5, 8, 7, 3, 7, 10]
-        }), new Student({
-            name: 'John',
-            surname: 'Brown',
-            age: 20,
-            mark: [5, 4, 6, 10, 7, 10]
-        })
-    ]; 
+    this.group = obj.group || [];
 
     this.setMarkByStudentName = function(mark, name) {
         this.group.find( (item) => item.name === name ? item.mark.push(mark) : false );
@@ -76,10 +49,7 @@ Teacher.prototype.constructor = Teacher;
 Teacher.prototype = Object.assign(Teacher.prototype, {
     getListOfNamesByAverageMark() {
         return this.group.sort((a, b) => b.averageMark() - a.averageMark())
-        .reduce( function (acc, item) {
-            acc += item.name + ' ';
-            return acc;
-        }, '').split(' ', this.group.length);
+        .map( (item) => item.name );
     },
     getStudentByName(name) {
         return this.group.find( (item) => item.name === name);
@@ -125,6 +95,33 @@ let teacher = new Teacher({
     name: 'Maxim',
     surname: 'Older',
     age: 29,
+    group: [
+        new Student({
+            name: 'Andrew',
+            surname: 'Wilson',
+            age: 18,
+            mark: [5, 2, 3, 10, 7, 1]
+        }), new Student({
+            name: 'Ella',
+            surname: 'Thomas',
+            age: 17,
+            mark: [5, 1, 3, 10, 2, 10]
+        }), new Student({
+            name: 'Eleanor',
+            surname: 'Walker',
+            age: 19,
+            mark: [5, 7, 5, 9, 8, 10]
+        }), new Student({
+            name: 'Maxim',
+            surname: 'Johnson',
+            age: 18,
+            mark: [5, 8, 7, 3, 7, 10]
+        }), new Student({
+            name: 'John',
+            surname: 'Brown',
+            age: 20,
+            mark: [5, 4, 6, 10, 7, 10]
+        })
+    ]
 });
-
 
